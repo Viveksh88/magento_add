@@ -68,8 +68,72 @@ class InstallSchema implements \Magento\Framework\Setup\InstallSchemaInterface
             [ 'nullable' => false, 'default' => '1', ],
             'Is Active'
         );
-        $installer->getConnection()->createTable($table);
-        //END   table setup
+        $installer->getConnection()->createTable($table);//$table end here
+
+        $table_A = $installer->getConnection()->newTable(//$table_A starts
+            $installer->getTable('excellence_crud_address')
+        )->addColumn(
+            'excellence_address_id',
+            \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+            null,
+            [ 'identity' => true, 'nullable' => false, 'primary' => true, 'unsigned' => true, ],
+            'Entity ID'
+        )->addColumn(
+            'excellence_user_id',
+            \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+            255,
+            [ 'nullable' => false, ],
+            'User ID'
+        )->addColumn(
+            'House_no',
+            \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+            255,
+            [ 'nullable' => false, ],
+            'House_number'
+        )->addColumn(
+            'Street_name',
+            \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+            255,
+            [ 'nullable' => false, ],
+            'Street'
+        )->addColumn(
+            'City_name',
+            \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+            255,
+            [ 'nullable' => false, ],
+            'City'
+        )->addColumn(
+            'State_name',
+            \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+            255,
+            [ 'nullable' => false, ],
+            'State'
+        )->addColumn(
+            'pin',
+            \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+            255,
+            [ 'nullable' => false, ],
+            'pin'
+        )->addColumn(
+            'creation_time',
+            \Magento\Framework\DB\Ddl\Table::TYPE_TIMESTAMP,
+            null,
+            [ 'nullable' => false, 'default' => \Magento\Framework\DB\Ddl\Table::TIMESTAMP_INIT, ],
+            'Creation Time'
+        )->addColumn(
+            'update_time',
+            \Magento\Framework\DB\Ddl\Table::TYPE_TIMESTAMP,
+            null,
+            [ 'nullable' => false, 'default' => \Magento\Framework\DB\Ddl\Table::TIMESTAMP_INIT_UPDATE, ],
+            'Modification Time'
+        )->addColumn(
+            'is_active',
+            \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
+            null,
+            [ 'nullable' => false, 'default' => '1', ],
+            'Is Active'
+        );
+        $installer->getConnection()->createTable($table_A);//$table_A ends
 $installer->endSetup();
     }
 }

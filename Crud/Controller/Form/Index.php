@@ -71,8 +71,10 @@ class Index extends \Magento\Framework\App\Action\Action
         if(isset($delete_data['delete_id'])){
             $id=$delete_data['delete_id'];
             $Deletedata = $this->_dataSend->create();
+            
             $Deletedata->load($id);
             $d_deleted = $Deletedata->delete();
+            
             if($d_deleted){
                 $this->messageManager->addNotice( __('Record Deleted Successfully !') );
             }

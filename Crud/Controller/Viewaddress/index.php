@@ -3,7 +3,7 @@
  *
  * Copyright © 2015 Excellencecommerce. All rights reserved.
  */
-namespace Excellence\Crud\Controller\Display;
+namespace Excellence\Crud\Controller\Viewaddress;
 
 class Index extends \Magento\Framework\App\Action\Action
 {
@@ -64,32 +64,15 @@ class Index extends \Magento\Framework\App\Action\Action
      */
     public function execute()
     {
-        $search_data = $this->getRequest()->getPostValue();
-        if(isset($search_data['u_name'])){
-            $user_n = $search_data['u_name'];
-            
-            $fetchdata = $this->_collectiondata->create()->getCollection();
-            $userData = $fetchdata->addFieldToFilter('username',array('like' => '%' . $user_n. '%'));
-           
-            foreach($userData as $u_collection){
-                $data[] = array(
-                    'id'=>$u_collection['excellence_crud_id'],
-                    'username'=>$u_collection['username'],
-                    'f_name'=>$u_collection['fristname'],
-                    'l_name'=>$u_collection['lastname'],
-                    'e_mail'=>$u_collection['email'],
-                    'pass' =>$u_collection['password'],
-                );
-               
-            }
-            $data['count'] = count($data);
-            return $this->getResponse()->setBody(json_encode($data));
-
-
-        }
-        
-		
-		return $this->resultPageFactory->create();
+ 
+        $add_address = $this->getRequest()->getParams();
+        if(isset($add_address['view_add_id'])){
+            $u_add_id = $add_address['view_add_id'];
+            $get_add = $this->_addresscollection->create()->getCollection();
+            $add_data = $get_add->addFieldToFilter('excellence_user_id',array('eq' => $u_add_id));
+            $this->_coreRegistry->register('show_data',$add_data);        
+        }        
+        return $this->resultPageFactory->create();
     }
 
 }
