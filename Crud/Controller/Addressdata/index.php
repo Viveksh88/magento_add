@@ -64,70 +64,70 @@ class Index extends \Magento\Framework\App\Action\Action
      */
     public function execute()
     {
-        $address_add = $this->getRequest()->getParams();
-        if(isset($address_add['delete_add_id'])){ //deleting address data..
-            $id=$address_add['delete_add_id'];
-            $Deletedata = $this->_addresscollection->create();
+        $addressAdd = $this->getRequest()->getParams();
+        if(isset($addressAdd['deleteAddId'])){ //deleting address data..
+            $id=$addressAdd['deleteAddId'];
+            $deleteData = $this->_addresscollection->create();
             
-            $data = $Deletedata->load($id);
+            $data = $deleteData->load($id);
             $params = $data['excellence_user_id'];
-            $d_deleted = $Deletedata->delete();
+            $dDeleted = $deleteData->delete();
             
-            if($d_deleted){
+            if($dDeleted){
                 $this->messageManager->addNotice( __('Record Deleted Successfully !') );
             }
-            $this->_redirect('crud/viewaddress/index', array('view_add_id' => $params));
+            $this->_redirect('crud/viewaddress/index', array('viewAddId' => $params));
         }
-        $edit_data = $this->getRequest()->getPostValue();
-        if(isset($edit_data['id'])){ //for editing address data
-            $a_id = $edit_data['id'];
-            $u_id = $edit_data['user_id'];
-            $house = $edit_data['h_no'];
-            $street = $edit_data['street'];
-            $city = $edit_data['city'];
-            $state = $edit_data['state'];
-            $pin = $edit_data['pin'];
-            $params = array('uid' => $u_id);
+        $editData = $this->getRequest()->getPostValue();
+        if(isset($editData['id'])){ //for editing address data
+            $aId = $editData['id'];
+            $uId = $editData['userId'];
+            $house = $editData['hNo'];
+            $street = $editData['street'];
+            $city = $editData['city'];
+            $state = $editData['state'];
+            $pin = $editData['pin'];
+            $params = array('uid' => $aId);
             
 
-            $model_update = $this->_addresscollection->create()->load($a_id);
-            $model_update->addData([
-                "excellence_address_id" =>$a_id,
-                "excellence_user_id" =>$u_id,
+            $modelUpdate = $this->_addresscollection->create()->load($aId);
+            $modelUpdate->addData([
+                "excellence_address_id" =>$aId,
+                "excellence_user_id" =>$uId,
                 "House_no" => $house,
                 "Street_name" => $street,
                 "City_name" => $city,
                 "State_name" => $state,
                 "pin" => $pin
                 ]);
-            $save_updated_Data = $model_update->save();
-            if($save_updated_Data){
+            $saveUpdatedData = $modelUpdate->save();
+            if($saveUpdatedData){
                 $this->messageManager->addSuccess( __('Record Updated Successfully....!') );
             }
             
             return ;
         }
         //for inserting address data into table
-        if(isset($address_add['address_user_id'])){
-            $data_add = $this->getRequest()->getPostValue();
+        if(isset($addressAdd['addressUserId'])){
+            $dataAdd = $this->getRequest()->getPostValue();
            
-           $user_id = $data_add['address_user_id'];
-           $h_no = $data_add['house_add'];
-           $street = $data_add['street_add'];
-           $city = $data_add['city_add'];
-           $state = $data_add['state_add'];
-           $pin = $data_add['pin_add'];
+           $userId = $dataAdd['addressUserId'];
+           $hNo = $dataAdd['houseAdd'];
+           $street = $dataAdd['streetAdd'];
+           $city = $dataAdd['cityAdd'];
+           $state = $dataAdd['stateAdd'];
+           $pin = $dataAdd['pinAdd'];
 
-           $address_insert = $this->_addresscollection->create();
-           $address_insert->addData([
-               "excellence_user_id" => $user_id,
-               "House_no" => $h_no,
+           $addressInsert = $this->_addresscollection->create();
+           $addressInsert->addData([
+               "excellence_user_id" => $userId,
+               "House_no" => $hNo,
                "Street_name" => $street,
                "City_name" => $city,
                "State_name" => $state,
                "pin" => $pin,
                ]);
-           $saveData = $address_insert->save();
+           $saveData = $addressInsert->save();
            if($saveData){
                $this->messageManager->addSuccess( __('Insert Record Successfully !') );
            }

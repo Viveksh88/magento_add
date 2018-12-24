@@ -61,8 +61,8 @@ class Index extends \Magento\Framework\App\Action\Action
      */
     public function execute()
     {
-        $add_address = $this->getRequest()->getParams('id');
-        if(isset($add_address['user_id'])){
+        $addAddress = $this->getRequest()->getParams();
+        if(isset($addAddress['userId'])){
             return $this->resultPageFactory->create();       
         }
     }

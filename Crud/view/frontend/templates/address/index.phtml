@@ -1,5 +1,5 @@
-<?php $user_id = $this->getRequest()->getParams('id'); ?>
-<?php if(isset($user_id['user_id'])):?>
+<?php $userId = $this->getRequest()->getParams(); ?>
+<?php if(isset($userId['userId'])):?>
 
 <div class="page-title-wrapper">
     <h1 class="page-title">
@@ -9,13 +9,13 @@
 
 <form class="form create account" action="<?php echo $this->getUrl("crud/addressdata/index");?>" method="POST">
     <fieldset class="fieldset ">
-        <input type="hidden" name = "address_user_id" class="get_id" value="<?php if(isset($user_id['user_id'])){ echo $user_id['user_id']; }?>">
+        <input type="hidden" name = "addressUserId" class="get-id" value="<?php if(isset($userId['userId'])){ echo $userId['userId']; }?>">
         <div class="field  required">
             <label class="label">
                 <span> House No.:</span>
             </label> 
             <div class="control">
-                <input required="true" class=" input-text required-entry" placeholder="Enter Flat/House no." type="text" name="house_add" value="" minlength="5" maxlength="10">
+                <input required="true" class=" input-text required-entry" placeholder="Enter Flat/House no." type="text" name="houseAdd" value="" minlength="5" maxlength="10">
             </div>
         </div>
         <div class="field  required">
@@ -23,7 +23,7 @@
                 <span>Street:</span>
             </label> 
             <div class="control">
-                <input required="true" class="input-text required-entry" placeholder="Enter Your Street" type="text" name="street_add" value="" minlength = "5" maxlength="40">
+                <input required="true" class="input-text required-entry" placeholder="Enter Your Street" type="text" name="streetAdd" value="" minlength = "5" maxlength="40">
             </div>
         <div>
     </fieldset>
@@ -33,7 +33,7 @@
                 <span>City:</span>
             </label>
             <div class="control"> 
-                <input required="true" class="input-text required-entry" placeholder="Enter Your City" type="text" name="city_add" value="" minlength = "4" maxlength="10">
+                <input required="true" class="input-text required-entry" placeholder="Enter Your City" type="text" name="cityAdd" value="" minlength = "4" maxlength="10">
             </div>
         </div>
         <div class="field  required">
@@ -41,7 +41,7 @@
                 <span>State:</span>
             </label>
             <div class="control"> 
-                <input required="true" class="input-text required-entry" placeholder="Enter Your State" type="text" name="state_add" value="" minlength = "4" maxlength="10">
+                <input required="true" class="input-text required-entry" placeholder="Enter Your State" type="text" name="stateAdd" value="" minlength = "4" maxlength="10">
             </div>
         </div>           
         <div class="field required">
@@ -49,12 +49,12 @@
                 <span>pin:</span>
             </label> 
             <div class="control"> 
-                <input required="true" class=" input-text" placeholder="Enter Your Pin" type="number" name="pin_add" value="" minlength = "4" maxlength="6">
+                <input required="true" class=" input-text" placeholder="Enter Your Pin" type="number" name="pinAdd" value="" minlength = "4" maxlength="6">
             </div>
         </div>
         <div class="actions-toolbar">
             <div class="primary">
-                <button name="add_address" class="action submit primary" title="Add Address">Add Address</button>
+                <button name="addAddress" class="action submit primary" title="Add Address">Add Address</button>
             </div>
         </div>
     </fieldset>

@@ -65,12 +65,12 @@ class Index extends \Magento\Framework\App\Action\Action
     public function execute()
     {
  
-        $add_address = $this->getRequest()->getParams();
-        if(isset($add_address['view_add_id'])){
-            $u_add_id = $add_address['view_add_id'];
-            $get_add = $this->_addresscollection->create()->getCollection();
-            $add_data = $get_add->addFieldToFilter('excellence_user_id',array('eq' => $u_add_id));
-            $this->_coreRegistry->register('show_data',$add_data);        
+        $addAddress = $this->getRequest()->getParams();
+        if(isset($addAddress['viewAddId'])){
+            $uAddId = $addAddress['viewAddId'];
+            $getAdd = $this->_addresscollection->create()->getCollection();
+            $addData = $getAdd->addFieldToFilter('excellence_user_id',array('eq' => $uAddId));
+            $this->_coreRegistry->register('showData',$addData);        
         }        
         return $this->resultPageFactory->create();
     }

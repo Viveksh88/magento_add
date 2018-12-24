@@ -42,8 +42,8 @@
                     <td class="edit_table" title="Edit" ><button class="action primary" >Edit</button></td>
                     <td style="display:none" class="save" title="Save" ><button class="action primary" >Save</button></td>
                     <td class="delete"><a href="<?php echo $this->getUrl('crud/form/index/id=.', array('delete_id' => $id));?>"> <button class="action primary"> Delete</button></a></td>
-                    <td class="delete"><a href="<?php echo $this->getUrl('crud/address/index/id=.', array('user_id' => $id));?>"> <button class="action primary"> Add Address</button></a></td>
-                    <td class="delete"><a href="<?php echo $this->getUrl('crud/viewaddress/index/id=.', array('view_add_id' => $id));?>"> <button class="action primary"> View Address</button></a></td>
+                    <td class="delete"><a href="<?php echo $this->getUrl('crud/address/index/id=.', array('userId' => $id));?>"> <button class="action primary"> Add Address</button></a></td>
+                    <td class="delete"><a href="<?php echo $this->getUrl('crud/viewaddress/index/id=.', array('viewAddId' => $id));?>"> <button class="action primary"> View Address</button></a></td>
                 </tr>
                 <?php $i++; ?>
                 <?php endforeach;?>
