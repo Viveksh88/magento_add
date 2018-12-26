@@ -1,5 +1,6 @@
 <?php $userId = $this->getRequest()->getParams(); ?>
 <?php if(isset($userId['userId'])):?>
+<div style= "width:7%" class="seeUsers"><a class="aLink" href="<?php echo $this->getUrl('crud/display/index');?>"> <button class="bButton action primary">Back..</button></a></div>
 
 <div class="page-title-wrapper">
     <h1 class="page-title">
@@ -33,7 +34,7 @@
                 <span>City:</span>
             </label>
             <div class="control"> 
-                <input required="true" class="input-text required-entry" placeholder="Enter Your City" type="text" name="cityAdd" value="" minlength = "4" maxlength="10">
+                <input required="true" class="input-text required-entry" placeholder="Enter Your City" type="text" name="cityAdd" value="" minlength = "4" maxlength="15">
             </div>
         </div>
         <div class="field  required">
@@ -41,7 +42,7 @@
                 <span>State:</span>
             </label>
             <div class="control"> 
-                <input required="true" class="input-text required-entry" placeholder="Enter Your State" type="text" name="stateAdd" value="" minlength = "4" maxlength="10">
+                <input required="true" class="input-text required-entry" placeholder="Enter Your State" type="text" name="stateAdd" value="" minlength = "4" maxlength="20">
             </div>
         </div>           
         <div class="field required">

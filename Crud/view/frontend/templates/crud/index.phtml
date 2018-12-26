@@ -23,7 +23,7 @@
 
     <form class="form create account" action="<?php echo $this->getUrl("crud/form/index");?>" method="POST">
         <fieldset class="fieldset ">
-            <input type="hidden" name = "user_u_id" class="get_id">
+            <input type="hidden" name = "userUId" class="get_id">
             <div class="field  required">
                 <label class="label">
                     <span>UserName:</span>
@@ -55,7 +55,7 @@
                     <span>Email:</span>
                 </label> 
                 <div class="control"> 
-                    <input required="true" class="email_edit input-text" placeholder="Enter Your Email Address" type="text" name="email" value="" >
+                    <input required="true" class="emailEdit input-text" placeholder="Enter Your Email Address" type="text" name="email" value="" >
                 </div>
             </div>
             <div class="field required">
@@ -74,7 +74,7 @@
             </div>
            <div class="actions-toolbar">
                 <div class="primary">
-                    <button name="send_data" class="action submit primary" title="Register">Register</button>
+                    <button name="sendData" class="action submit primary" title="Register">Register</button>
                 </div>
             </div>
         </fieldset>

@@ -64,21 +64,21 @@ class Index extends \Magento\Framework\App\Action\Action
      */
     public function execute()
     {
-        $search_data = $this->getRequest()->getPostValue();
-        if(isset($search_data['u_name'])){
-            $user_n = $search_data['u_name'];
+        $searchData = $this->getRequest()->getPostValue();
+        if(isset($searchData['uName'])){
+            $userN = $searchData['uName'];
             
             $fetchdata = $this->_collectiondata->create()->getCollection();
-            $userData = $fetchdata->addFieldToFilter('username',array('like' => '%' . $user_n. '%'));
+            $userData = $fetchdata->addFieldToFilter('username',array('like' => '%' . $userN. '%'));
            
-            foreach($userData as $u_collection){
+            foreach($userData as $uCollection){
                 $data[] = array(
-                    'id'=>$u_collection['excellence_crud_id'],
-                    'username'=>$u_collection['username'],
-                    'f_name'=>$u_collection['fristname'],
-                    'l_name'=>$u_collection['lastname'],
-                    'e_mail'=>$u_collection['email'],
-                    'pass' =>$u_collection['password'],
+                    'id'=>$uCollection['excellence_crud_id'],
+                    'username'=>$uCollection['username'],
+                    'fName'=>$uCollection['fristname'],
+                    'lName'=>$uCollection['lastname'],
+                    'eMail'=>$uCollection['email'],
+                    'pass' =>$uCollection['password'],
                 );
                
             }

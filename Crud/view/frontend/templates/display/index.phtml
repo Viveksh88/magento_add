@@ -22,7 +22,7 @@
                     <th class="data-grid-th">FirstName</th>
                     <th class="data-grid-th">LastName</th>
                     <th class="data-grid-th">Email</th>
-                    <th class="data-grid-th ed_save">Edit/Save</th>
+                    <th class="data-grid-th edSave">Edit/Save</th>
                     <th class="data-grid-th del">Delete</th> 
                     <th class="data-grid-th del">Add Address</th> 
                     <th class="data-grid-th del">View USer Address</th>  
@@ -32,18 +32,18 @@
             <?php foreach($collectiondata as $collection):?>
                 <tr class="data-row">
                     <?php $id = $collection['excellence_crud_id'];?>
-                    <td  hidden class="edit_id"><?php echo $id;?></td>
-                    <td  class="s_no "><?php echo $i;?></td>
+                    <td  hidden class="editId"><?php echo $id;?></td>
+                    <td  class="sNo "><?php echo $i;?></td>
                     <td contenteditable="false" class="username"><?php echo $collection['username'];?></td>
                     <td contenteditable="false" class="fname "><?php echo $collection['fristname'];?></td>
                     <td contenteditable="false" class="lastname"><?php echo $collection['lastname'];?></td>
-                    <td contenteditable="false" class="email_id "><?php echo $collection['email'];?></td>
+                    <td contenteditable="false" class="emailId "><?php echo $collection['email'];?></td>
                     <td hidden class="pass"><?php echo $collection['password'];?></td>
-                    <td class="edit_table" title="Edit" ><button class="action primary" >Edit</button></td>
+                    <td class="editTable" title="Edit" ><button class="action primary" >Edit</button></td>
                     <td style="display:none" class="save" title="Save" ><button class="action primary" >Save</button></td>
-                    <td class="delete"><a href="<?php echo $this->getUrl('crud/form/index/id=.', array('delete_id' => $id));?>"> <button class="action primary"> Delete</button></a></td>
-                    <td class="delete"><a href="<?php echo $this->getUrl('crud/address/index/id=.', array('userId' => $id));?>"> <button class="action primary"> Add Address</button></a></td>
-                    <td class="delete"><a href="<?php echo $this->getUrl('crud/viewaddress/index/id=.', array('viewAddId' => $id));?>"> <button class="action primary"> View Address</button></a></td>
+                    <td class="delete"><a href="<?php echo $this->getUrl('crud/form/index/id=.', array('deleteId' => $id));?>"> <button class="action primary"> Delete</button></a></td>
+                    <td class=""><a href="<?php echo $this->getUrl('crud/address/index/id=.', array('userId' => $id));?>"> <button class="action primary"> Add Address</button></a></td>
+                    <td class=""><a href="<?php echo $this->getUrl('crud/viewaddress/index/id=.', array('viewAddId' => $id));?>"> <button class="action primary"> View Address</button></a></td>
                 </tr>
                 <?php $i++; ?>
                 <?php endforeach;?>
@@ -62,18 +62,18 @@
 require(
    ['jquery'],
         function($) {
-            $('.edit_table').click(function () {         //Make Table Editable...      
-                var tr_search = $(this).closest("tr");
+            $('.editTable').click(function () {         //Make Table Editable...      
+                var trSearch = $(this).closest("tr");
                 var  currentTD = $(this).closest("tr").find('td');
-                tr_search.find('.save').show();
-                tr_search.find('.edit_table').hide();  
+                trSearch.find('.save').show();
+                trSearch.find('.editTable').hide();  
                 $.each(currentTD, function () {
                     currentTD.css("background-color", "lightgrey");
                     $(this).prop('contenteditable', true);
                     $(this).css('padding','4px');
                     $(this).focus();
-                    $(".edittable").prop('contenteditable', false); 
-                    $(".s_no").prop('contenteditable', false); 
+                    $(".editTable").prop('contenteditable', false); 
+                    $(".sNo").prop('contenteditable', false); 
                     $(".save").prop('contenteditable', false); 
                     $(".delete").prop('contenteditable', false);        
                 });
@@ -81,17 +81,17 @@ require(
             $(".save").click(function(){   // to Save Data to database....
                 $(this).prop('contenteditable', false); 
                 var row = $(this).closest("tr"); 
-                var row_css = $(this).closest("tr").find('td');  
-                row_css.css("background-color", "white");  // Find the row
-                var table_id = row.find(".edit_id").text();
+                var rowCss = $(this).closest("tr").find('td');  
+                rowCss.css("background-color", "white");  // Find the row
+                var tableId = row.find(".editId").text();
                 var username = row.find(".username").text();
                 var fname = row.find(".fname").text();
                 var lname = row.find(".lastname").text();
-                var e_mail_ad = row.find(".email_id").text();
-                var p_wd = row.find(".pass").text();  
+                var eMailAd = row.find(".emailId").text();
+                var pwd = row.find(".pass").text();  
                 $.ajax({
                     url:"<?php echo $this->getUrl('crud/form/index');?>",
-                    data:{id:table_id,uname:username,fname:fname,lname:lname,email_ad:e_mail_ad,pwd:p_wd},
+                    data:{id:tableId,uname:username,fname:fname,lname:lname,emailAd:eMailAd,pwd:pwd},
                     type:'POST',
                     success:function(response){
                         if(response){
@@ -101,22 +101,22 @@ require(
                 });
             });                                                      
             $("#find").click(function(){    // Search Data Js work... 
-                var search_user_val = $(".input-val").val();
+                var searchUserVal = $(".input-val").val();
                 $.ajax({
                     url:"<?php echo $this->getUrl('crud/display/index');?>",
-                    data:{u_name:search_user_val},
+                    data:{uName:searchUserVal},
                     type:'POST',
                     success:function(response){
 
                         var rr = JSON.parse(response);
-                        $(".ed_save").hide();
+                        $(".edSave").hide();
                         $(".del").hide();
                         $(".data-row").html("");
                         $(".order-products-toolbar").hide();
                         var url = window.location;    
                         for(var i=0;i<rr.count;i++)
                         {
-                            $(".admin__table").append('<tr class="data-row"><td hidden>'+rr[i].id+'</td><td>'+(i+1)+'</td><td  class="username">'+rr[i].username+'</td><td  class="firstname">'+rr[i].f_name+'</td><td  class="lastname">'+rr[i].l_name+'</td><td  class="email">'+rr[i].e_mail+'</td><td hidden  class="pass">'+rr[i].pass+'</td></tr>');
+                            $(".admin__table").append('<tr class="data-row"><td hidden>'+rr[i].id+'</td><td>'+(i+1)+'</td><td  class="username">'+rr[i].username+'</td><td  class="firstname">'+rr[i].fName+'</td><td  class="lastname">'+rr[i].lName+'</td><td  class="email">'+rr[i].eMail+'</td><td hidden  class="pass">'+rr[i].pass+'</td></tr>');
                         }
                     
                     }
