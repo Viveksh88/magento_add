@@ -11,13 +11,6 @@
  * @var $block \Magento\Checkout\Block\Cart
  */
 
-// $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-
-// $slct_options = $objectManager->create("Magento\Framework\Registry")->registry('orderData');
-// echo "<pre>";
-// print_r($slct_options->getData());
-
-
 if ($block->getItemsCount()) {
     echo $block->getChildHtml('with-items');
 } else {

@@ -32,8 +32,8 @@ class AfterPlaceOrder implements ObserverInterface
 
         //get Order All Item
         $itemCollection = $order->getItemsCollection();
-        // $orderData = $order->getData();
-        $customerEmail = $order->getCustomerEmail();
+        
+        $customerEmail = $order->getCustomerEmail();//Saving Data into Data Base
         $customerid = $order->getCustomerId();
         $customerTotal = $order->getBaseGrandTotal();
         $currency = $order->getBaseCurrencyCode();
@@ -47,15 +47,7 @@ class AfterPlaceOrder implements ObserverInterface
             "customerFirstname" => $customerFname,
             "customerLastname" => $customerLname,
             "currencyCode" => $currency,
-            ]);
-            $saveOrderData = $orderData->save();
-            // if($saveOrderData){
-            //     $this->messageManager->addSuccess( __('Order Record Saveds Successfully !') );
-            // }
-        // $this->registry->register('orderData', $order);
-        // $customer = $order->getCustomerId(); // using this id you can get customer name
-        // die();  
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
-       
+        ]);
+        $saveOrderData = $orderData->save();                                                                                                                                                                                                                                                                        
 	}
 }
