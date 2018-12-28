@@ -3,7 +3,7 @@
  *
  * Copyright © 2015 Excellencecommerce. All rights reserved.
  */
-namespace Excellence\Crud\Controller\Display;
+namespace Excellence\Crud\Controller\Address;
 
 class Index extends \Magento\Framework\App\Action\Action
 {
@@ -29,7 +29,6 @@ class Index extends \Magento\Framework\App\Action\Action
     protected $resultPageFactory;
     protected $_collectiondata;
     protected $_coreRegistry;
-    protected $_addresscollection;
 
     /**
      * @param Action\Context $context
@@ -43,14 +42,12 @@ class Index extends \Magento\Framework\App\Action\Action
        \Magento\Framework\App\Action\Context $context,
         \Magento\Framework\App\Cache\TypeListInterface $cacheTypeList,
         \Excellence\Crud\Model\TestFactory  $collectiondata,
-        \Excellence\Crud\Model\AddressFactory  $addresscollection,
         \Magento\Framework\App\Cache\StateInterface $cacheState,
         \Magento\Framework\App\Cache\Frontend\Pool $cacheFrontendPool,
         \Magento\Framework\View\Result\PageFactory $resultPageFactory
     ) {
         parent::__construct($context);
         $this->_coreRegistry = $coreRegistry;
-        $this->_addresscollection = $addresscollection;
         $this->_collectiondata = $collectiondata;
         $this->_cacheTypeList = $cacheTypeList;
         $this->_cacheState = $cacheState;
@@ -64,32 +61,10 @@ class Index extends \Magento\Framework\App\Action\Action
      */
     public function execute()
     {
-        $searchData = $this->getRequest()->getPostValue();
-        if(isset($searchData['uName'])){
-            $userN = $searchData['uName'];
-            
-            $fetchdata = $this->_collectiondata->create()->getCollection();
-            $userData = $fetchdata->addFieldToFilter('username',array('like' => '%' . $userN. '%'));
-           
-            foreach($userData as $uCollection){
-                $data[] = array(
-                    'id'=>$uCollection['excellence_crud_id'],
-                    'username'=>$uCollection['username'],
-                    'fName'=>$uCollection['fristname'],
-                    'lName'=>$uCollection['lastname'],
-                    'eMail'=>$uCollection['email'],
-                    'pass' =>$uCollection['password'],
-                );
-               
-            }
-            $data['count'] = count($data);
-            return $this->getResponse()->setBody(json_encode($data));
-
-
+        $addAddress = $this->getRequest()->getParams();
+        if(isset($addAddress['userId'])){
+            return $this->resultPageFactory->create();       
         }
-        
-		
-		return $this->resultPageFactory->create();
     }
 
 }

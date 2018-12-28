@@ -67,48 +67,50 @@ class Index extends \Magento\Framework\App\Action\Action
     {
 
         // Deleting Data From Database......using Id..
-        $delete_data = $this->getRequest()->getParams('id');
-        if(isset($delete_data['delete_id'])){
-            $id=$delete_data['delete_id'];
-            $Deletedata = $this->_dataSend->create();
-            $Deletedata->load($id);
-            $d_deleted = $Deletedata->delete();
-            if($d_deleted){
+        $deleteData = $this->getRequest()->getParams('id');
+        if(isset($deleteData['deleteId'])){
+            $id=$deleteData['deleteId'];
+            $delete = $this->_dataSend->create();
+            
+            $delete->load($id);
+            $dDeleted = $delete->delete();
+            
+            if($dDeleted){
                 $this->messageManager->addNotice( __('Record Deleted Successfully !') );
             }
             $this->_redirect('crud/display/index');
         }
         // Adding And Updating Data To database....
-        $data_edit = $this->getRequest()->getPostValue();
-        if(!empty($data_edit['id'])){
+        $dataEdit = $this->getRequest()->getPostValue();
+        if(!empty($dataEdit['id'])){
             
            
-            $u_id = $data_edit['id'];
-            $username = $data_edit['uname'];
-            $fname = $data_edit['fname'];
-            $lname = $data_edit['lname'];
-            $email = $data_edit['email_ad'];
-            $password = $data_edit['pwd'];
-            $hash_pass = substr(md5($password),0,8);//password Encrypted upto 7 numbers...
+            $uId = $dataEdit['id'];
+            $username = $dataEdit['uname'];
+            $fname = $dataEdit['fname'];
+            $lname = $dataEdit['lname'];
+            $email = $dataEdit['emailAd'];
+            $password = $dataEdit['pwd'];
+            $hashPass = substr(md5($password),0,8);//password Encrypted upto 7 numbers...
 
-            $model_update = $this->_dataSend->create()->load($u_id);
-            $model_update->addData([
-                "excellence_crud_id" =>$u_id,
+            $modelUpdate = $this->_dataSend->create()->load($uId);
+            $modelUpdate->addData([
+                "excellence_crud_id" =>$uId,
                 "username" => $username,
                 "fristname" => $fname,
                 "lastname" => $lname,
                 "email" => $email,
-                "password" => $hash_pass
+                "password" => $hashPass
                 ]);
-            $save_updated_Data = $model_update->save();
-            if($save_updated_Data){
+            $saveUpdatedData = $modelUpdate->save();
+            if($saveUpdatedData){
                 $this->messageManager->addSuccess( __('Record Updated Successfully....!') );
             }
             return $this->resultPageFactory->create();
         }   
 
         $post = $this->getRequest()->getPostValue();
-        if(isset($post['send_data']))
+        if(isset($post['sendData']))
         {
             
             $username = $post['username'];
@@ -116,18 +118,18 @@ class Index extends \Magento\Framework\App\Action\Action
             $lname = $post['lname'];
             $email = $post['email'];
             $password = $post['password'];
-            $hash_pass = substr(md5($password),0,8);//password Encrypted upto 7 numbers...
+            $hashPass = substr(md5($password),0,8);//password Encrypted upto 7 numbers...
             
 
-            $model_insert = $this->_dataSend->create();
-            $model_insert->addData([
+            $modelInsert = $this->_dataSend->create();
+            $modelInsert->addData([
                 "username" => $username,
                 "fristname" => $fname,
                 "lastname" => $lname,
                 "email" => $email,
-                "password" => $hash_pass
+                "password" => $hashPass
                 ]);
-            $saveData = $model_insert->save();
+            $saveData = $modelInsert->save();
             if($saveData){
                 $this->messageManager->addSuccess( __('Insert Record Successfully !') );
             }
