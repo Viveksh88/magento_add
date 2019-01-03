@@ -29,7 +29,6 @@ class AfterPlaceOrder implements ObserverInterface
     {
        $orderId = $observer->getEvent()->getOrderIds();
         $order = $this->order->load($orderId);
-
         //get Order All Item
         $itemCollection = $order->getItemsCollection();
         
@@ -40,6 +39,7 @@ class AfterPlaceOrder implements ObserverInterface
         $customerFname = $order->getCustomerFirstname();
         $customerLname = $order->getCustomerLastname();
         $orderData = $this->_orderCollection->create();
+        
         $orderData->addData([
             "grandTotal" => $customerTotal,
             "customerId" => $customerid,
@@ -48,6 +48,7 @@ class AfterPlaceOrder implements ObserverInterface
             "customerLastname" => $customerLname,
             "currencyCode" => $currency,
         ]);
+
         $saveOrderData = $orderData->save();                                                                                                                                                                                                                                                                        
 	}
 }

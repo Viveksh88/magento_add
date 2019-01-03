@@ -69,7 +69,6 @@ class InstallSchema implements \Magento\Framework\Setup\InstallSchemaInterface
             'Is Active'
         );
         $installer->getConnection()->createTable($table);//$table end here
-
         $tableB = $installer->getConnection()->newTable(
             $installer->getTable('excellence_crud_orderSuccessDetails')
         )->addColumn(
@@ -135,8 +134,8 @@ class InstallSchema implements \Magento\Framework\Setup\InstallSchemaInterface
             [ 'nullable' => false, 'default' => '1', ],
             'Is Active'
         );
+        
         $installer->getConnection()->createTable($tableB);//$tableB end here
-
 
         $table_A = $installer->getConnection()->newTable(//$table_A starts
             $installer->getTable('excellence_crud_address')
