@@ -1,5 +1,4 @@
 <?php
-
 namespace Excellence\Custom\Setup;
 
 use Magento\Framework\Setup\InstallDataInterface;
@@ -19,13 +18,11 @@ class InstallData implements InstallDataInterface {
 		$this->_eavSetupFactory = $eavSetupFactory;
 		$this->_attributeRepository = $attributeRepository;
 	}
-
 	public function install( ModuleDataSetupInterface $setup, ModuleContextInterface $context )
 	{
 
 		$eavSetup = $this->_eavSetupFactory->create(['setup' => $setup]);
 
-		// add customer_attribute to customer
 		$eavSetup->removeAttribute(\Magento\Customer\Model\Customer::ENTITY, 'customer_attribute');
 		$eavSetup->addAttribute(
 		\Magento\Customer\Model\Customer::ENTITY, 'customer_attribute', [
@@ -39,7 +36,6 @@ class InstallData implements InstallDataInterface {
 		]
 	);
 
-	// allow customer_attribute attribute to be saved in the specific areas
 	$attribute = $this->_attributeRepository->get('customer', 'customer_attribute');
 	$setup->getConnection()
 	->insertOnDuplicate(
